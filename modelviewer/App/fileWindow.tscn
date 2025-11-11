@@ -7,7 +7,6 @@ oversampling_override = 1.0
 title = "Load a Model"
 initial_position = 1
 size = Vector2i(800, 500)
-visible = true
 max_size = Vector2i(900, 900)
 theme = ExtResource("1_0pddw")
 ok_button_text = "Load"

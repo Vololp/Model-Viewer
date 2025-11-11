@@ -1,6 +1,6 @@
 class_name FILE_PATH_MANAGER extends Node
 
-
+## This function will load a FBX file to the scene.
 static func LoadFBX(Path:String) -> void:
 	var FBX_State = FBXState.new()
 	var FBX_Doc = FBXDocument.new()
@@ -14,6 +14,7 @@ static func LoadFBX(Path:String) -> void:
 	else :
 		DEBUGGING_MANAGER.ErrorMessage(str("Importing Failed! | ",Path))
 
+## This function will load a GLB file to the scene.
 static func LoadGLB(Path:String) -> void:
 	var GLTF_State = GLTFState.new()
 	var GLTF_Doc = GLTFDocument.new()
@@ -27,7 +28,7 @@ static func LoadGLB(Path:String) -> void:
 	else:
 		DEBUGGING_MANAGER.ErrorMessage(str("Importing Failed! | ",Path))
 
-
+## This function is for loading models also seeing if it's a model file and support's the formate
 static func LoadModelFromFile(Path) -> void:
 	var FilePath : String
 

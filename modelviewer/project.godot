@@ -20,13 +20,13 @@ config/icon="uid://bdtv1g3usq2of"
 
 [autoload]
 
-VariantManager="*res://Scripts/VariantManager.gd"
 FilePathManager="*res://Scripts/FilePathManager.gd"
 UiManager="*res://Scripts/UiManager.gd"
 FileWindow="*res://App/fileWindow.tscn"
 Ui="*res://App/ui.tscn"
 DebuggingManager="*res://Scripts/DebuggingManager.gd"
 UsrControlManager="*res://Scripts/UsrControlManager.gd"
+VariantManager="*res://Scripts/VariantManager.gd"
 
 [display]
 
@@ -56,5 +56,6 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+rendering_device/fallback_to_d3d12=false
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true

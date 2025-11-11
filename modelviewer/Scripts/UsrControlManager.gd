@@ -1,5 +1,6 @@
 class_name USR_CONTROL_MANAGER extends Node
 
+## This function will smoothly move the camera.
 static func CameraMovement(Delta:float) -> void:
 	VariantManager.SmoothMotion = lerp(VariantManager.SmoothMotion,VariantManager.MouseMotion,15*Delta)
 	VariantManager.CameraPivit1.rotate_y(deg_to_rad(-VariantManager.SmoothMotion.x * VariantManager.MouseSensitivity))
@@ -7,11 +8,12 @@ static func CameraMovement(Delta:float) -> void:
 
 	VariantManager.MouseMotion = Vector2.ZERO
 
+## This function will smoothly move the camera on the y-axis.
 static func CameraYposMotion(Delta:float) -> void:
-	if VariantManager.CurrentCamera.global_position.y != VariantManager.YPos:
-		VariantManager.CurrentCamera.position.y = lerpf(VariantManager.CurrentCamera.position.y,VariantManager.YPos,5*Delta)
+	if VariantManager.CameraPivit1.global_position.y != VariantManager.YPos:
+		VariantManager.CameraPivit1.global_position.y = lerpf(VariantManager.CameraPivit1.global_position.y,VariantManager.YPos,12*Delta)
 
-
+## This function will smoothly zoom the camera on the x-axis.
 static func CameraZposMotion(Delta:float) -> void:
 	if VariantManager.CurrentCamera.global_position.z != VariantManager.ZPos:
 		VariantManager.CurrentCamera.position.z = lerpf(VariantManager.CurrentCamera.position.z,VariantManager.ZPos,5*Delta)

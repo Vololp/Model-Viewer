@@ -6,3 +6,4 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+shadow_offset = Vector2(0.792, 1.929)

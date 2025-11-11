@@ -1,12 +1,18 @@
 class_name MAIN_SCRIPT extends Node3D
 
+######################################
+## Tha Variables
 @export var Pivit1 : Node3D
 @export var Pivit2 : Node3D
 @export var GetCamera : Camera3D
 @export var Storage : Node3D
 @export var GetTimer : Timer
 
+######################################
+## The Engine Functions
+
 func _ready() -> void:
+	## This set's the variables here to VariantManager so all scripts can have access.
 	VariantManager.MouseSensitivity = 0.2
 	VariantManager.ZPos = 5
 	VariantManager.YPos = 0.4
@@ -16,17 +22,32 @@ func _ready() -> void:
 	VariantManager.Storage = Storage
 	VariantManager.GetTimer = GetTimer
 
+	## This load's signals on start.
+
 	Ui.find_child("LoadButton").connect("pressed",UI_MANAGER.LoadButton)
 	Ui.find_child("RemoveButton").connect("pressed",UI_MANAGER.RemoveButton)
 	FileWindow.connect("file_selected",FILE_PATH_MANAGER.LoadModelFromFile)
 	get_window().files_dropped.connect(FILE_PATH_MANAGER.LoadModelFromFile)
 	GetTimer.connect("timeout",DEBUGGING_MANAGER.ClearErrorMessage)
 
+	## This will see the usr drop a model file on the excutable to open on start.
+
+	if !OS.get_cmdline_args().size() == 1:
+		print(OS.get_cmdline_args())
+		print("nothing to open, continue")
+	else:
+		print(OS.get_cmdline_args())
+		FILE_PATH_MANAGER.LoadModelFromFile(OS.get_cmdline_args())
+
+######################################
+
 func _input(event: InputEvent) -> void:
 
+	## This will set the mouse input relative to MouseMotion in VariantManager.
 	if event is InputEventMouseMotion and VariantManager.CanPivit != false:
 		VariantManager.MouseMotion = event.relative
 
+	## This will pivit the camera is the usr presses the right mouse button.
 	if Input.is_action_just_pressed("RightMouseButton"):
 		VariantManager.CanPivit = true
 		VariantManager.MousePosCash = get_viewport().get_mouse_position()
@@ -36,18 +57,25 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		Input.warp_mouse(VariantManager.MousePosCash)
 
+	## This will zoom the camera if the usr scroll in or out.
 	if Input.is_action_pressed("ScrollDown"):
 		VariantManager.ZPos += 0.2
 	elif Input.is_action_pressed("ScrollUp"):
 		VariantManager.ZPos -= 0.2
 
+	## This will move the camera on the y-axis when the usr presses the middle mouse button.
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
 		VariantManager.YPos += event.relative.y * VariantManager.MouseSensitivity /45
 
+	## This will clamp the camera from going to far (really necessary)
 	VariantManager.ZPos = clampf(VariantManager.ZPos,0.2,20)
-	VariantManager.YPos = clampf(VariantManager.YPos,0.0,1000)
+	VariantManager.YPos = clampf(VariantManager.YPos,-1000,1000)
+
+######################################
 
 func _process(delta: float) -> void:
+
+	## These are functions to make the camera move.
 	USR_CONTROL_MANAGER.CameraMovement(delta)
 	USR_CONTROL_MANAGER.CameraZposMotion(delta)
 	USR_CONTROL_MANAGER.CameraYposMotion(delta)
