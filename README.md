@@ -2,6 +2,8 @@ A simple app where you can view models.
 
 This app only supports | gltf, fbx |
 
+The Biggest Feature of all ( No AI )
+
 If you want to exporting or editing the project make sure you have Godot 4.5.
 This Application is open sourced plus with frequent update's but not too much.
 Also This Application is function based, so the functions are in separate scripts to make
